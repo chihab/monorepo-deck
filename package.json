@@ -1,0 +1,15 @@
+{
+  "name": "monorepo-deck",
+  "version": "1.0.0",
+  "author": "Chihab Otmani",
+  "license": "MIT",
+  "scripts": {
+    "start": "mdx-deck deck.mdx"
+  },
+  "devDependencies": {
+    "mdx-deck": "^4.1.1"
+  },
+  "dependencies": {
+    "react-syntax-highlighter": "^15.2.1"
+  }
+}

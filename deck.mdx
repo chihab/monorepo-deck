@@ -1,0 +1,316 @@
+import { Box } from "theme-ui";
+import Highlighter from "react-syntax-highlighter";
+import { themes } from "mdx-deck";
+
+export const theme = {
+  ...themes.dark,
+  colors: {
+    text: "white",
+    background: "#111233",
+    primary: "#b40db7",
+  },
+  styles: {
+    th: {
+      border: "1px solid",
+      borderColor: "primary",
+      margin: "0",
+    },
+    td: {
+      border: "1px solid",
+      borderColor: "primary",
+    },
+  },
+};
+
+## ⚡ Building large scale applications in a Monorepo ⚡
+
+Chihab Otmani
+
+---
+
+<!-- ## About me
+
+- Sr Software Engineer
+- React/ive Developer
+- Independant Consultant
+- Trainer / Coach
+- Dad of [👦,👶]
+
+--- -->
+
+## What is a large scale application?
+
+For the presentation, large-scale code base.
+
+---
+
+## What is a Monorepo?
+
+Multiple projects stored in the same repository.
+
+---
+
+## Who uses a Monorepo?
+
+- OSS: React, Angular, Vue, Gatsby, Jest, Babel...
+- Companies: Google, Twitter, Facebook, Microsoft, Uber...
+
+---
+
+## Other names for a Monorepo?
+
+- Workspace
+- Multi-package repository
+
+---
+
+## Monorepo != Monolith
+
+- Monorepo or Multirepo is about Code Storage
+- Monolith or Modular is about Code Structure
+
+---
+
+## Use case scenario
+
+A client requires to develop two applications
+
+- having the same design specs
+- having the same authentication story
+- having different business user stories
+
+---
+
+## Code Structure
+
+---
+
+## Monolith approach
+
+Each application has its own implementations
+
+- Code duplication
+- Inconsistency
+
+---
+
+## Modular approach
+
+- Shared Design System library
+- Shared Authentication library
+
+---
+
+## Code Storage
+
+---
+
+## Multirepo
+
+☠️ Inter-dependency management ☠️
+
+- Compatibility between versions
+- Updating versions
+
+---
+
+## Other important issues
+
+- No unified approach
+- Code duplication
+- Slight functional variations
+- Complex Review/QA
+- Friction on creating reusable libraries
+
+---
+
+# Monorepo
+
+---
+
+## Monorepo structure
+
+```
+node_modules
+packages
+ dashboard
+   src
+     Subscriptions/
+     App.tsx
+     index.ts
+   pacakge.json
+ admin
+ ui
+   src
+     Button.tsx
+   pacakge.json
+ core
+package.json
+tsconfig.json
+prettier.json
+.eslintrc
+```
+
+---
+
+## Monorepo
+
+- Sharing best practices
+- Code consistency
+- One Pull Request (Atomic changes)
+- Code discoverability
+- No burden with distributing modules
+
+---
+
+## Downsides of a Monorepo
+
+- Slow builds (Incremental build)
+- Permission management (Code ownership)
+- Expensice CI/CD (Dedicated team)
+
+---
+
+## It is all about tooling
+
+Without the right tooling, it can harm you.
+
+---
+
+## Tooling we need
+
+- Package management
+- Cross-package orchestration
+
+---
+
+## Yarn workspaces
+
+- Hoists common packages
+- Single yarn.lock
+- Doesn't affect the whole System
+- Utility to execute actions on workspaces
+
+---
+
+# Demo (npm link => yarn)
+
+---
+
+## Lerna
+
+- Leverage Yarn workspaces
+- Optimizes the workflow with git
+
+---
+
+## Lerna versioning
+
+- **Fixed**: Single version for all packages (lerna.json)
+- **Independent**: Independent for each package (package.json)
+
+---
+
+# Demo
+
+---
+
+## Scaling a monorepo
+
+---
+
+## Dependency graph Analysis
+
+packages/dashboard/package.json
+
+```js
+{
+  "name": "@project/dashboard",
+  "dependencies": {
+    "@project/core": "1.0.0"
+  }
+}
+
+```
+
+---
+
+<Highlighter language="shell">lerna run build --parallel --stream</Highlighter>
+
+- Run scripts in parallel with lerna
+- Stream the output to the terminal
+
+⚠️ Parallel ignores topological sort ⚠️
+
+---
+
+<Highlighter language="shell">lerna diff</Highlighter>
+
+Diff packages since the last release
+
+---
+
+<Highlighter language="shell">lerna changed</Highlighter>
+
+Display changed dependencies since the last release
+
+---
+
+<Highlighter language="shell">lerna run build --since</Highlighter>
+
+Build only changed dependencies since the last release
+
+---
+
+<Highlighter language="shell">lerna version --conventional-commits</Highlighter>
+
+Version using conventional commits
+
+---
+
+<Highlighter language="shell">lerna publish</Highlighter>
+
+Create new release versions of **updated** packages
+
+---
+
+# Demo 💻
+
+---
+
+## Tooling
+
+- husky
+- lint-staged
+- commitzen
+- eslint
+- prettier
+
+---
+
+## DX
+
+- TypeScript = JavaScript at any Scale.
+- Use tsconfig paths in development mode
+- Package your libraries using Rollup (ESM)
+
+---
+
+# Demo 💻
+
+---
+
+## Other Monorepo Tool
+
+- Angular CLI workspaces
+- Nx. DevTools for Monorepos
+- Bazel (Google)
+- Buck (Facebook)
+
+---
+
+# Questions? 🤔
+
+---
+
+# Thanks! 😀
